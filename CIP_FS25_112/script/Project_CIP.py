@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 13 20:29:32 2025
-
-@author: bur
-"""
 import numpy as np
 import pandas as pd
 import glob
@@ -15,7 +9,7 @@ import pandas as pd
 
 
 
-csv_files = glob.glob(f"immoscout*.csv")
+csv_files = glob.glob(f"data/immoscout*.csv")
 
 dfs = []
 
@@ -359,7 +353,7 @@ def getgeocoordinates_publictransport(df):
 if False: getgeocoordinates_publictransport(df) #calculate only with new dataset because of time
 
 
-df_geocoordinates=pd.read_csv(f"coordinates_adresses.csv")[['complete_address', 'latitude', 'longitude','oev_erreichb_ewap']]
+df_geocoordinates=pd.read_csv(f"data/coordinates_adresses.csv")[['complete_address', 'latitude', 'longitude','oev_erreichb_ewap']]
 df_geocoordinates=df_geocoordinates.drop_duplicates()
 df=df.merge(df_geocoordinates)
 
@@ -439,7 +433,7 @@ plt.xlabel('Monthly Rent (CHF)')
 plt.ylabel('Count')
 
 plt.tight_layout()
-plt.savefig("price_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/price_distribution.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 
@@ -465,7 +459,7 @@ plt.ylabel('Count')
 plt.subplots_adjust(wspace=0.4) 
 
 plt.tight_layout()
-plt.savefig("livingspace_rooms.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/livingspace_rooms.png", dpi=300, bbox_inches="tight")
 plt.show()
 ###############################################
 # Calculate percentage of properties with each amenity
@@ -486,7 +480,7 @@ plt.title('Percentage of Properties with Different Amenities')
 plt.xlabel('Percentage of Properties')
 plt.ylabel( ' ')
 plt.tight_layout()
-plt.savefig("percentage_properties_with_amenities.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/percentage_properties_with_amenities.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 
@@ -659,7 +653,7 @@ plt.figure(figsize=(12, 8))
 sns.heatmap(matrix, cmap="Greens", annot=True, fmt='.2f')
 plt.title('Correlation Matrix')
 plt.tight_layout()
-plt.savefig("geographic_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/geographic_distribution.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 
@@ -670,7 +664,7 @@ plt.show()
 df.to_csv(f"df_for_modelling.csv",index=False)
 
 # Copy the dataframe df to a new dataframe df_modelling
-df_modelling = pd.read_csv(f"df_for_modelling.csv")
+df_modelling = pd.read_csv(f"data/df_for_modelling.csv")
 
 # Prepare features for modeling
 from sklearn.model_selection import train_test_split
@@ -756,7 +750,7 @@ plt.title('Ridge Regression: Predicted vs Actual Rental Prices')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig("predicted_actual_prices.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/predicted_actual_prices.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 # Fetaure Importance
@@ -798,7 +792,7 @@ plt.title('Key Drivers of Rental Prices in Swiss Cities')
 plt.xlabel('Effect on Monthly Rent (CHF)')
 plt.ylabel('Feature')
 plt.tight_layout()
-plt.savefig("key_drivers_rental_prices.png", dpi=300)
+plt.savefig("images/key_drivers_rental_prices.png", dpi=300)
 plt.show()
 
 
