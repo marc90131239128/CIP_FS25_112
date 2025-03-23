@@ -1,4 +1,4 @@
-# Understanding Swiss Rental Market Prices 
+# **Understanding the Drivers of Rental Prices in Swiss Cities: A Machine Learning Approach**
 
 ## Overview
 A data-driven analysis of rental prices in German-speaking Swiss cities using machine learning approaches. The project combines web-scraped rental listings from ImmoScout24 with socioeconomic data to uncover key price drivers and market patterns.
