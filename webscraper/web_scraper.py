@@ -155,7 +155,7 @@ finally:
 
 # Save results to a DataFrame
 df2 = pd.DataFrame(apartments)
-df2.to_csv("immoscout_st.gallen_1_onwards.csv", index=False)
+df2.to_csv("data/immoscout_st.gallen_1_onwards.csv", index=False)
 print(" Data saved to immoscout_st.gallen_1_onwards.csv")
 
 # Display results
