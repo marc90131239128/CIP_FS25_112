@@ -364,8 +364,8 @@ df = df[df["complete_address"] != "Bahnhofstrasse 2, Raron,3018 Bern"]
 
 
 # Steuerdaten hinzufügen
-df_steuern_personen=pd.read_excel(f"Steuerdaten_2021.xlsx",sheet_name="121",skiprows=2)
-df_steuern=pd.read_excel(f"Steuerdaten_2021.xlsx",sheet_name="122",skiprows=2)
+df_steuern_personen=pd.read_excel(f"data/Steuerdaten_2021.xlsx",sheet_name="121",skiprows=2)
+df_steuern=pd.read_excel(f"data/Steuerdaten_2021.xlsx",sheet_name="122",skiprows=2)
 
 df_median_einkommen=df_steuern.iloc[:,:4]
 df_steuern_personen=df_steuern_personen.iloc[:, 4:13].replace('- ',np.nan)
@@ -378,7 +378,7 @@ for i in range(len(df_steuern)):
     weighted_median.append(round(np.median(np.repeat(steuern_pro_p.loc[i].dropna(), df_steuern_personen.loc[i].dropna())),1))
 df_median_einkommen['median_einkommen']=pd.Series(weighted_median)    
 
-df_gemeindeliste=pd.read_csv(f"Gemeindeliste.csv",sep=";")
+df_gemeindeliste=pd.read_csv(f"data/Gemeindeliste.csv",sep=";")
 steuerdaten=pd.merge(df_median_einkommen[['Gemeinde ID','median_einkommen']],df_gemeindeliste[['BFS-Nr','PLZ']],left_on=['Gemeinde ID'],right_on=['BFS-Nr'])
 df['PLZ']=df['PLZ'].astype(int)
 steuerdaten=steuerdaten[['median_einkommen','PLZ']].drop_duplicates(subset=['PLZ'])
@@ -630,10 +630,10 @@ plt.ylim([45.8183, 47.8084])
 ax.grid(True, linestyle='--', alpha=0.3, zorder=1)
 
 plt.tight_layout()
-plt.savefig("map", dpi=300, bbox_inches="tight")
+plt.savefig("images/map", dpi=300, bbox_inches="tight")
 plt.show()
 #
-
+print(df.columns)
 # Correlation Matrix
 # Select numeric columns for correlation
 numeric_columns = ['Price (CHF/Month)', 'Net Price', 'Additional Costs', 'Rooms', 
@@ -653,7 +653,7 @@ plt.figure(figsize=(12, 8))
 sns.heatmap(matrix, cmap="Greens", annot=True, fmt='.2f')
 plt.title('Correlation Matrix')
 plt.tight_layout()
-plt.savefig("images/geographic_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig("images/correlation_matrix.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 
@@ -661,7 +661,7 @@ plt.show()
 ########## Modelling ##########
 
 #make a csv file of the final df
-df.to_csv(f"df_for_modelling.csv",index=False)
+df.to_csv(f"data/df_for_modelling.csv",index=False)
 
 # Copy the dataframe df to a new dataframe df_modelling
 df_modelling = pd.read_csv(f"data/df_for_modelling.csv")
@@ -753,7 +753,7 @@ plt.tight_layout()
 plt.savefig("images/predicted_actual_prices.png", dpi=300, bbox_inches="tight")
 plt.show()
 
-# Fetaure Importance
+# Feature Importance
 numeric_binary_features = continuous_features + binary_features
 
 

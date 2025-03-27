@@ -21,4 +21,4 @@ def convert_notebook_to_html(notebook_path):
     print(f"Conversion complete! HTML file saved as: {output_file}")
 
 if __name__ == '__main__':
-    convert_notebook_to_html('project_CIP_notebook.ipynb') 
+    convert_notebook_to_html('notebook/project_CIP_notebook.ipynb') 
